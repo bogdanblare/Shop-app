@@ -1,88 +1,35 @@
-import './App.scss';
-import Header from './component/Header';
-import Home from './component/Home';
-import Shop from './component/Shop';
-import Detail from './component/Detail';
-import Checkout from './component/Checkout';
-import Complete from './component/Complete';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
-  const [cartItems, setCartItems] = useState(new Map());
+  const [count, setCount] = useState(0)
 
-  const [itemCount, setItemCount] = useState(0);
-
-  function addToCart(key, quantity) {
-    const currentQty = cartItems.get(key) || 0;
-    const newQty = currentQty + quantity;
-
-    const newCartItems = new Map(cartItems);
-    newCartItems.set(key, newQty);
-
-    setCartItems(newCartItems);
-  }
-
-  function incrementCart(key) {
-    addToCart(key, 1);
-  }
-
-  function decrementCart(key) {
-    const currentQty = cartItems.get(key) || 0;
-    if (currentQty > 1) {
-      const newQty = currentQty - 1;
-
-      const newCartItems = new Map(cartItems);
-      newCartItems.set(key, newQty);
-
-      setCartItems(newCartItems);
-    } else {
-      const newCartItems = new Map(cartItems);
-      newCartItems.delete(key);
-
-      setCartItems(newCartItems);
-    }
-  }
-
-  function resetCart() {
-    const newCartItems = new Map();
-    setCartItems(newCartItems);
-  }
-
-  useEffect(() => {
-    let newCount = 0;
-    for (let value of cartItems.values()) {
-      newCount += value;
-    }
-    setItemCount(newCount);
-  }, [cartItems]);
   return (
-    <Router basename={process.env.PUBLIC_URL + '/'}>
-      <Header itemCount={itemCount} />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/shop" component={Shop} />
-        <Route
-          path="/shop/:id"
-          render={(props) => <Detail {...props} addToCart={addToCart} />}
-        ></Route>
-        <Route
-          exact
-          path="/checkout"
-          render={(props) => (
-            <Checkout
-              {...props}
-              cartItems={cartItems}
-              incrementCart={incrementCart}
-              decrementCart={decrementCart}
-              resetCart={resetCart}
-            />
-          )}
-        />
-        <Route exact path="/complete" component={Complete} />
-      </Switch>
-    </Router>
-  );
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-export default App;
+export default App
