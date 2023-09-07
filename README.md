@@ -1,6 +1,7 @@
 # ✨ Shop-app
 This was the final React project from The Odin Project's JavaScript curriculum. The main goal of this project was to build a fake e-commerce store using React. The fake store website consists of three main sections (home products and about pages) and the shopping cart page. To handle the logic of changing pages was used react-router-dom. This project was made using React JS.
-# Run Locally
+
+# 🔧 Run Locally
 
 Clone the project
 
